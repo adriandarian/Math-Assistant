@@ -1,64 +1,55 @@
 /*
-Filename:		calculator.js
+Filename:	calculator.js
 Description:	performs the behind-the-scenes operations
 */
 
 
 /*
-Object:			customFunction
+Object:		customFunction
 Description:	allows user to create their own functions
-				which are combinations of other functions.
-				equation is stored through an array
+		which are combinations of other functions.
+		equation is stored through an array
+		Example declaration: var name = new customFunction (expression);
 */
-var customFunction = {
-	//type: value,
-	functions: [],
-	createdByUser: false,
-	evalute: function () {}
+function customFunction (expression, createdByUser) = {
+	this.createdByUser = createByUser || false;
+	this.evaluate =  function () {};
+	this.delete = function () {functions.splice (this.index, 1);};
+	this.functions = convertToArray (expression);
+	
+	// add to list of functions
+	functions.push (this);
+	this.index = functions.length - 1;
 };
 
-
-var add = function (a, b) {
-	return a+b;
+// converts a written composition of functions into
+// an array of functions
+// no numbers involved (just functions)
+var convertToArray = function (expression) {
+	
 }
 
-var subtract = function (a, b) {
-	return a-b;
-}
-
-var multiply = function (a, b) {
-	return a*b;
-}
-
-var divide = function (a, b) {
-
-}
-
+/*
+Predefined Basic Operations
+*/
+var add = function (a, b) {return a+b;}
+var subtract = function (a, b) {return a-b;}
+var multiply = function (a, b) {return a*b;}
+var divide = function (a, b) {return a/b;}
+var exponent = function (a, b) {return Math.pow (a, b);}
+var absoluteValue = function (a) {return Math.abs (a);}
+var sine = function (a, radians) {return Math.sin (a * (radians ? 1 : Math.PI / 90));}
+var cosine = function (a, radians) {return Math.cos (a * (radians ? 1 : Math.PI / 90));}
+var logarithm = function (base, a) {return Math.log (a) / Math.log (base);}
 var factorial = function (a, ignored) {
-	if (a % 1 != 0)
-		return -1;
+	// incorrect input
+	if (a % 1 != 0 || a <= 0)
+		return -1; // to be dealt with else where
+	if (a < 2)
+		return 1;
 	return a * factorial (a-1, ignored);
 }
 
-var exponent = function (a, b) {
-	return Math.pow (a, b);
-}
-
-var absoluteValue = function (a) {
-	return Math.abs (a);
-}
-
-var sine = function (a, radians) {
-	return Math.sin (a * (radians ? 1 : Math.PI / 90)); 
-}
-
-var cosine = function (a, radians) {
-	return Math.cos (a * (radians ? 1 : Math.PI / 90));
-}
-
-var logarithm = function (base, a) {
-	return Math.log (a) / Math.log (base);
-}
 var functions = [
 	add,
 	subtract,
@@ -69,7 +60,8 @@ var functions = [
 	absoluteValue,
 	sine,
 	cosine,
-	logarithm
+	logarithm,
+	customFunction
 ];
 
 
